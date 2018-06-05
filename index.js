@@ -124,13 +124,13 @@ class CheckboxCustom extends BaseComponent {
             }
             if(typeof(option.value) != 'undefined'){
                 return (
-                    <View style={[Styles.radio,{borderColor:'#0066CC'}]}>
-                        <Text style={Styles.selected}>{option.value}</Text>
+                    <View style={[Styles.radio, Styles.radioSelected,this.props.radioStyle]}>
+                        <Text style={Styles.optionSelected}>{option.value}</Text>
                     </View>
                 );
             }
             return (
-                <View style={[Styles.radio,{borderColor:'#0066CC'}]}>
+                <View style={[Styles.radio, this.props.radioStyle]}>
                     <View style={Styles.dot}></View>
                 </View>
             );
@@ -178,14 +178,14 @@ class CheckboxCustom extends BaseComponent {
                     activeOpacity={disabled ? 1 : 0.7}
                     onPress={!disabled ? ()=>{this._selectOption(option)} : null}
                 >
-                    <View>
+                    
                         <View
                             style={Styles.row}
                         >
                             <View style={Styles.optionIndicator}>{this._renderIndicator(option)}</View>
                             <View style={Styles.optionLabel}>{this._renderText(option)}</View>
                         </View>
-                    </View>
+                    
                 </TouchableOpacity>
                 {this._renderSeparator(option)}
             </View>
@@ -195,7 +195,8 @@ class CheckboxCustom extends BaseComponent {
     render() {
         return (
             <ListView
-                style={[Styles.list, this.props.style]}
+                contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap'}}
+                style={[this.props.style]}
                 dataSource={this.state.dataSource}
                 renderRow={this._renderRow}
             />
