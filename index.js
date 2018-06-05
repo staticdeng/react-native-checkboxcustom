@@ -39,9 +39,9 @@ class CheckboxCustom extends BaseComponent {
     constructor(props) {
         super(props);
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => true});
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
         this.ds = ds;
-
+        
         this.state = {
             dataSource: ds.cloneWithRows(this.props.options),
             selectedOptions: this.props.selectedOptions || [],
@@ -81,10 +81,8 @@ class CheckboxCustom extends BaseComponent {
     }
 
     _selectOption(selectedOption) {
-
-        let selectedOptions = this.state.selectedOptions;
-        console.log(selectedOption);
-        console.log(selectedOptions);
+        
+        let selectedOptions = this.state.selectedOptions || [];
         if(typeof(selectedOption.value) != 'undefined'){
             var index = selectedOptions.indexOf(selectedOption.value);
         }else{
@@ -105,14 +103,15 @@ class CheckboxCustom extends BaseComponent {
         this._updateSelectedOptions(selectedOptions);
 
         //run callback
-        this.props.onSelection(selectedOption);
+        this.props.onSelection(selectedOptions);
     }
 
     _isSelected(option) {
+        let selectedOptions = this.state.selectedOptions || [];
         if(typeof(option.value) != 'undefined'){
-            return this.state.selectedOptions.indexOf(option.value) !== -1;
+            return selectedOptions.indexOf(option.value) !== -1;
         }else{
-            return this.state.selectedOptions.indexOf(option) !== -1;
+            return selectedOptions.indexOf(option) !== -1;
         }
 
     }
@@ -165,7 +164,7 @@ class CheckboxCustom extends BaseComponent {
     }
 
     _renderRow(option) {
-
+    
         if(typeof this.props.renderRow === 'function') {
             return this.props.renderRow(option);
         }
@@ -179,12 +178,14 @@ class CheckboxCustom extends BaseComponent {
                     onPress={!disabled ? ()=>{this._selectOption(option)} : null}
                 >
                     
-                        <View
-                            style={Styles.row}
-                        >
-                            <View style={Styles.optionIndicator}>{this._renderIndicator(option)}</View>
-                            <View style={Styles.optionLabel}>{this._renderText(option)}</View>
+                    <View
+                        style={Styles.row}
+                    >
+                        <View style={Styles.optionIndicator}>
+                            {this._renderIndicator(option)}
                         </View>
+                        <View style={Styles.optionLabel}>{this._renderText(option)}</View>
+                    </View>
                     
                 </TouchableOpacity>
                 {this._renderSeparator(option)}
