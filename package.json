@@ -1,0 +1,26 @@
+{
+  "name": "react-native-checkboxcustom",
+  "version": "1.0.1",
+  "description": "checkbox component for react native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzfrontend/react-native-checkboxcustom.git"
+  },
+  "keywords": [
+    "react-native-checkbox",
+    "react-native-checkboxgroup",
+    "react-native-checkboxcustom",
+    "checkbox",
+    "checkboxgroup"
+  ],
+  "author": "dzfrontend",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzfrontend/react-native-checkboxcustom/issues"
+  },
+  "homepage": "https://github.com/dzfrontend/react-native-checkboxcustom#readme"
+}
