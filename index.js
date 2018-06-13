@@ -118,8 +118,8 @@ class CheckboxCustom extends BaseComponent {
 
     _renderIndicator(option) {
         if (this._isSelected(option)) {
-            if(typeof this.props.renderIndicator === 'function') {
-                return this.props.renderIndicator(option);
+            if(typeof this.props.renderIndicatorChecked === 'function') {
+                return this.props.renderIndicatorChecked(option);
             }
             if(typeof(option.value) != 'undefined'){
                 return (
@@ -134,6 +134,9 @@ class CheckboxCustom extends BaseComponent {
                 </View>
             );
         }else{
+            if (typeof this.props.renderIndicator === 'function') {
+                return this.props.renderIndicator(option);
+            }
             if(typeof(option.value) != 'undefined'){
                 return (<View style={Styles.radio}><Text>{option.value}</Text></View>);
             }
