@@ -8,24 +8,14 @@ export default React.StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         alignItems: 'center',
-        paddingLeft:10,
-        paddingRight:10
     },
 
     optionLabel: {
         marginLeft: 5
     },
 
-    optionIndicator: {
-        // justifyContent: 'center',
-        // alignItems: 'center'
-    },
-
-
     separator: {
         height: 1,
-        marginTop: 4,
-        marginBottom: 4,
     },
     radio:{
         width: 36,
