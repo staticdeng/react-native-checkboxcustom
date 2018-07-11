@@ -59,7 +59,8 @@ class CheckboxCustom extends BaseComponent {
     componentWillReceiveProps(nextProps) {
         this._updateSelectedOptions(nextProps.selectedOptions);
         this.setState({
-            disabled: nextProps.disabled
+            disabled: nextProps.disabled,
+            dataSource: this.ds.cloneWithRows(nextProps.options)
         });
     }
     _updateSelectedOptions(selectedOptions) {
