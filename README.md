@@ -1,46 +1,110 @@
 # react-native-checkboxcustom
-一个跨平台（iOS和Android）单和多项选择React Native组件，checkbox的样式用户可以自己来定义。此组件基于react-native-checkboxlist
-## 安装
+
+A cross-platform radio and multiple-choice React Native component that checkbox style users can define
+
+![example](https://github.com/dzfrontend/react-native-checkboxcustom/blob/master/assets/checkboxcustom.png)
+
+# Installation
 
 ```sh
 npm install react-native-checkboxcustom --save
 ```
 
-## 使用
+# Usage
 
-这里是组件使用的概述。
 ```jsx
 import CheckboxCustom from 'react-native-checkboxcustom'
 ```
-### 使用示例1
+
+# Example 
+
+### default checkbox
+
 ```jsx
 <CheckboxCustom
-    options={[
-    'Lorem ipsum dolor sit',
-    'Lorem ipsum',
-    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr',
-    'Lorem ipsum dolor sit amet, consetetur'
-    ]}
-    selectedOptions={['Lorem ipsum']}
-    maxSelectedOptions={2}
-    onSelection={(option)=>alert(option + ' was selected!')}
+  options={
+    [
+      { label: '', value: 'A' },
+      { label: '', value: 'B' },
+      { label: '', value: 'C' },
+      { label: '', value: 'D' }
+    ]
+  }
+  maxSelectedOptions={1}
+  onSelection={(option)=>console.log(option + ' was selected!')}
 />
+
 ```
-### 使用示例2
-分别设置值和显示文字
+### custom checkbox
+
+component:
+
 ```jsx
-<CheckboxCustom
-    options={[
-    {label:'Lorem ipsum dolor sit',value:'A'},
-    {label:'Lorem ipsum',value:'B'},
-    {label:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr',value:'C'},
-    {label:'Lorem ipsum dolor sit amet, consetetur',value:'D'}
-    ]}
-    selectedOptions={['A','C']}
-    onSelection={(option)=>alert(option + ' was selected!')}
-/>
+
+_renderIndicator = (option) => {
+  return (
+    <View style={[styles.checkbox]}>
+      <Text style={[styles.option]}>{option.value}</Text>
+    </View>
+  )
+}
+_renderIndicatorChecked = (option) => {
+  return (
+    <View style={[styles.checkbox, styles.checkboxSelected]}>
+      <Text style={[styles.option, styles.optionSelected]}>{option.value}</Text>
+    </View>
+  )
+}
+render(){
+  return(
+	<CheckboxCustom
+	  options={
+	    [
+	      {label:'this is list of A',value:'A'},
+	      {label:'this is list of B',value:'B'},
+	      {label:'this is list of C',value:'C'},
+	      {label:'this is list of D',value:'D'}
+	    ]
+	  }
+	  selectedOptions={['A', 'C']}
+	  renderIndicator={this._renderIndicator}
+	  renderIndicatorChecked={this._renderIndicatorChecked}
+	  onSelection={(option)=>console.log(option + ' was selected!')}
+	  contentContainerStyle={{ flexDirection: 'column' }}
+	/>
+  )
+}
+
 ```
-## 属性
+styles:
+
+```
+const styles = StyleSheet.create({
+  checkbox: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    borderWidth: 2,
+    borderColor: '#c4c4c4',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 8,
+    marginVertical: 5
+  },
+  checkboxSelected: {
+    borderColor: '#3bcb7e',
+  },
+  option: {
+    fontSize: 16,
+    color: '#656565'
+  },
+  optionSelected: {
+    color: '#3bcb7e'
+  },
+});
+```
+
+# Api
 
 * `style - {}` custom style of the list
 * `optionStyle - {}` custom style of the option element
@@ -53,16 +117,6 @@ import CheckboxCustom from 'react-native-checkboxcustom'
 * `renderText - function(option)` should return a text node, default: text node
 * `renderRow - function(option)` should return a option view
 * `disabled - bool` if set to true component is disabled and can't be interacted with
-
-## 截图
-示例1
-
-![example](https://github.com/dzfrontend/react-native-checkboxcustom/blob/master/assets/images/screenshot02.png)
-
-示例2
-
-![example](https://github.com/dzfrontend/react-native-checkboxcustom/blob/master/assets/images/screenshot01.png)
-
 
 
 
